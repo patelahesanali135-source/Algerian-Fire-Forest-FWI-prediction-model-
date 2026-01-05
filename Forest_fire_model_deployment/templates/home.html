@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FWI Prediction</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            padding: 30px 40px;
+            border-radius: 16px;
+            width: 380px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 10px;
+            border: none;
+            background: #ff9800;
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: #ffc107;
+            transform: scale(1.03);
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #00ffcc;
+        }
+
+        .footer {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🔥 FWI Prediction</h1>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="POST">
+        <input type="text" name="Temperature" placeholder="Temperature" required>
+        <input type="text" name="RH" placeholder="Relative Humidity (RH)" required>
+        <input type="text" name="Ws" placeholder="Wind Speed (Ws)" required>
+        <input type="text" name="Rain" placeholder="Rain" required>
+        <input type="text" name="FFMC" placeholder="FFMC" required>
+        <input type="text" name="DMC" placeholder="DMC" required>
+        <input type="text" name="ISI" placeholder="ISI" required>
+        <input type="text" name="Classes" placeholder="Classes" required>
+        <input type="text" name="Region" placeholder="Region" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if results %}
+        <div class="result">
+            🌲 FWI Prediction: {{ results }}
+        </div>
+    {% endif %}
+
+    <div class="footer">
+        Ridge Regression Model · Flask App
+    </div>
+</div>
+
+</body>
+</html>
